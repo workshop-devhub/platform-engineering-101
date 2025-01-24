@@ -70,12 +70,33 @@ you've chosen (e.g., demo environment or developer sandbox):
     the better option.
 
 ## Step 2a: Install Red Hat Developer Hub through Helm Charts
+_You can't choose the namespace within the sandbox: It will be something like
+'username + -dev'. Know that you will have to pay attention to the configurations 
+later on in this workshop: you'll need to check that the namespace is correct as
+most of the manifest are based upon the 'demo-project' namespace._
+
+_We will be using 'developer-hub' as the name of the instance. Feel free to change it
+to what you like, but know that you will have to pay attention to the configurations
+later on in this workshop: you'll need to check that the name is correct if you
+didn't go along with 'developer-hub'._
+
 * In order to do so, you can follow 
 [this training exercise](https://developers.redhat.com/learning/learn:openshift:install-and-configure-red-hat-developer-hub-and-explore-templating-basics/resource/resources:install-red-hat-developer-hub-developer-sandbox).  
+**!!! Don't forget to change the Root Schema > global > instance URL, at the end of the exercise., at the time of writing, this was '.apps.rm1.0a51.p1.openshiftapps.com' for me.**
 * In case you want to troubleshoot the installation, you can follow the instructions in
 [this training exercise](https://developers.redhat.com/learn/deploying-and-troubleshooting-red-hat-developer-hub-openshift-practical-guide).
 
 ## Step 2b: Install Red Hat Developer Hub through the operator
+_We will be using 'demo-project' as a project/namespace name. Feel free to change it
+to what you like, but know that you will have to pay attention to the configurations
+later on in this workshop: you'll need to check that the namespace is correct if you
+didn't go along with 'demo-project'._
+
+_We will be using 'developer-hub' as the name of the instance. Feel free to change it
+to what you like, but know that you will have to pay attention to the configurations
+later on in this workshop: you'll need to check that the name is correct if you
+didn't go along with 'developer-hub'._
+
 In order to do so, you can follow 
 [this training exercise](https://developers.redhat.com/learn/deploying-and-troubleshooting-red-hat-developer-hub-openshift-practical-guide).  
 (Next to installation instructions, this training exercise contains a section with troubleshooting instructions as well).
