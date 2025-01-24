@@ -5,7 +5,7 @@ The first step to start the workshop is to have a running OpenShift cluster
 available. During the workshop, the OpenShift cluster and its integrations 
 will serve as our internal developer platform. There are two ways to obtain an 
 OpenShift cluster:
-* From the [Red Hat Developers website](https://developers.redhat.com){:target="_blank"}, 
+* From the [Red Hat Developers website](https://developers.redhat.com), 
     which offers tutorials, free e-books, and access to a free OpenShift sandbox.
 * From a demo environment provided for you.
 
