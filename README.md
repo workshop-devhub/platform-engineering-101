@@ -100,3 +100,17 @@ didn't go along with 'developer-hub'._
 In order to do so, you can follow 
 [this training exercise](https://developers.redhat.com/learn/deploying-and-troubleshooting-red-hat-developer-hub-openshift-practical-guide).  
 (Next to installation instructions, this training exercise contains a section with troubleshooting instructions as well).
+
+# Step 3: Integrate with GitHub
+Before diving into tasks like setting up software templates, we first need to establish integration with a Git repository. 
+For this workshop, we’ve chosen GitHub. Note that GitHub apps have already been preconfigured for you, 
+so you can skip that part in this
+[training exercise](https://developers.redhat.com/learning/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub/resource/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub:resource:prerequisites-and-step-step-guide).
+Starting from the second part of 
+[the exercise](https://developers.redhat.com/learning/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub/resource/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub:resource:prerequisites-and-step-step-guide), 
+focus on the following steps 
+_(you can skip other configuration steps, as tasks like software template creation will be covered later in the workshop):_
+* '**2. Create a basic GitHub integration within Developer Hub** (i.e., repository creation and scanning)'
+* '**3.3 Enable GitHub authentication**'
+
+
