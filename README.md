@@ -106,11 +106,23 @@ Before diving into tasks like setting up software templates, we first need to es
 For this workshop, we’ve chosen GitHub. Note that GitHub apps have already been preconfigured for you, 
 so you can skip that part in this
 [training exercise](https://developers.redhat.com/learning/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub/resource/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub:resource:prerequisites-and-step-step-guide).
+
+In case you would like to continue with your own GitHub application, feel free to obtain the following
+parameters from you GitHub organization and/or GitHub app:  
+_How to obtain these parameters is described in section '1. Configure GitHub'_
+* app ID.
+* client ID.
+* client secret.
+* private key (i.e., .pem file).  
+
+Next to the written tutorial, we've created a [dynamic video tutorial](https://app.arcade.software/share/yAz2okhKSeBNCRrqmQ39),
+which you can follow as well to obtain these parameters. (Whenever the video pauzes, you have to 
+click 'next' or 'arrow right' to continue).
+
+
 Starting from the second part of 
 [the exercise](https://developers.redhat.com/learning/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub/resource/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub:resource:prerequisites-and-step-step-guide), 
-focus on the following steps 
-_(you can skip other configuration steps, as tasks like software template creation will be covered later in the workshop):_
+focus on the following steps:   
+_(you can skip other configuration steps, as tasks like software template creation will be covered later in the workshop)_
 * '**2. Create a basic GitHub integration within Developer Hub** (i.e., repository creation and scanning)'
 * '**3.3 Enable GitHub authentication**'
-
-
