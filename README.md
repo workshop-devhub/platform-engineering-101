@@ -56,6 +56,11 @@ In order to get the OpenShift cluster, you will need to execute the following st
 TODO - fallback scenario
 
 ## Step 2: Install Red Hat Developer Hub on OpenShift
+_When interacting with an OpenShift cluster, you can make use of the OpenShift CLI._
+_Command line tools can be found by logging in to an OpenShift cluster, clicking the 
+question mark button in the top right corner and selecting the tool you want to download.
+In case you don't want to configure your local machine, you can make use of Red Hat Dev Spaces._
+
 To install Red Hat Developer Hub on OpenShift, you have two options:
 1. Using an operator.
 2. Using Helm charts.
@@ -97,11 +102,19 @@ to what you like, but know that you will have to pay attention to the configurat
 later on in this workshop: you'll need to check that the name is correct if you
 didn't go along with 'developer-hub'._
 
+_Source manifest files for the tutorials can be found in this repository: 
+[https://github.com/maarten-vandeperre/developer-hub-training-exercises](https://github.com/maarten-vandeperre/developer-hub-training-exercises),
+which can be cloned in your dev spaces environment._
+
 In order to do so, you can follow 
 [this training exercise](https://developers.redhat.com/learn/deploying-and-troubleshooting-red-hat-developer-hub-openshift-practical-guide).  
 (Next to installation instructions, this training exercise contains a section with troubleshooting instructions as well).
 
 # Step 3: Integrate with GitHub
+_Source manifest files for the tutorials can be found in this repository:
+[https://github.com/maarten-vandeperre/developer-hub-training-exercises](https://github.com/maarten-vandeperre/developer-hub-training-exercises),
+which can be cloned in your dev spaces environment._
+
 Before diving into tasks like setting up software templates, we first need to establish integration with a Git repository. 
 For this workshop, we’ve chosen GitHub. Note that GitHub apps have already been preconfigured for you, 
 so you can skip that part in this
