@@ -150,3 +150,20 @@ _(you can skip other configuration steps, as tasks like software template creati
 * '**3.3 Enable GitHub authentication**'
 
 ## Step 4: Applying software templates / golden path templates
+_Source manifest files for the tutorials can be found in this repository:
+[https://github.com/maarten-vandeperre/developer-hub-training-exercises](https://github.com/maarten-vandeperre/developer-hub-training-exercises),
+which can be cloned in your dev spaces environment. Be aware to change the default namespace 'demo-project'
+within these manifest files to your namespace.   
+!! In case you went for the Helm based installation,
+make sure to use the '-helm' manifest files._
+
+For this exercise, we will make use of the following software template:
+[Open Liberty software template](https://github.com/OpenLiberty/liberty-backstage-template/blob/main/liberty-template/template.yaml)
+
+Instructions on how to add software templates to Developer Hub and how to apply them,
+can be found in this
+[training exercise](https://developers.redhat.com/learning/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub/resource/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub:resource:prerequisites-and-step-step-guide).
+(Section '3.1 Create a repository via a software template').
+
+
+
