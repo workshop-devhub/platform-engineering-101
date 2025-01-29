@@ -87,7 +87,8 @@ didn't go along with 'developer-hub'._
 
 * In order to do so, you can follow 
 [this training exercise](https://developers.redhat.com/learning/learn:openshift:install-and-configure-red-hat-developer-hub-and-explore-templating-basics/resource/resources:install-red-hat-developer-hub-developer-sandbox).  
-**!!! Don't forget to change the Root Schema > global > instance URL, at the end of the exercise., at the time of writing, this was '.apps.rm1.0a51.p1.openshiftapps.com' for me.**
+**!!! Don't forget to change the Root Schema > global > instance URL, at the end of the exercise., at the time of writing, this was 'apps.rm1.0a51.p1.openshiftapps.com' for me.**
+![](images/global_root_domain.png)
 * In case you want to troubleshoot the installation, you can follow the instructions in
 [this training exercise](https://developers.redhat.com/learn/deploying-and-troubleshooting-red-hat-developer-hub-openshift-practical-guide).
 
@@ -104,7 +105,8 @@ didn't go along with 'developer-hub'._
 
 _Source manifest files for the tutorials can be found in this repository: 
 [https://github.com/maarten-vandeperre/developer-hub-training-exercises](https://github.com/maarten-vandeperre/developer-hub-training-exercises),
-which can be cloned in your dev spaces environment._
+which can be cloned in your dev spaces environment. Be aware to change the default namespace 'demo-project'
+within these manifest files to your namespace._
 
 In order to do so, you can follow 
 [this training exercise](https://developers.redhat.com/learn/deploying-and-troubleshooting-red-hat-developer-hub-openshift-practical-guide).  
@@ -113,7 +115,8 @@ In order to do so, you can follow
 # Step 3: Integrate with GitHub
 _Source manifest files for the tutorials can be found in this repository:
 [https://github.com/maarten-vandeperre/developer-hub-training-exercises](https://github.com/maarten-vandeperre/developer-hub-training-exercises),
-which can be cloned in your dev spaces environment._
+which can be cloned in your dev spaces environment. Be aware to change the default namespace 'demo-project'
+within these manifest files to your namespace._
 
 Before diving into tasks like setting up software templates, we first need to establish integration with a Git repository. 
 For this workshop, we’ve chosen GitHub. Note that GitHub apps have already been preconfigured for you, 
@@ -139,3 +142,27 @@ focus on the following steps:
 _(you can skip other configuration steps, as tasks like software template creation will be covered later in the workshop)_
 * '**2. Create a basic GitHub integration within Developer Hub** (i.e., repository creation and scanning)'
 * '**3.3 Enable GitHub authentication**'
+
+
+
+
+# TODO
+* for helm charts:
+  * dynamic plugin configuration name: redhat-developer-hub-dynamic-plugins
+  * app config name: redhat-developer-hub-app-config
+  * in app config, change data:app-config-rhdh to data:app-config
+* pods not automatically restarted
+*  add to app config:
+```yaml
+database:
+    connection:
+      password: ${POSTGRESQL_ADMIN_PASSWORD}
+      user: postgres
+```
+
+on instance 
+```yaml
+envFrom:
+            - secretRef:
+                name: rhdh-secrets-github-credentials
+```
