@@ -74,7 +74,7 @@ you've chosen (e.g., demo environment or developer sandbox):
     **or** if you **require more fine-grained control**, the Helm-based installation is 
     the better option.
 
-## Step 2a: Install Red Hat Developer Hub through Helm Charts
+### Step 2a: Install Red Hat Developer Hub through Helm Charts
 _You can't choose the namespace within the sandbox: It will be something like
 'username + -dev'. Know that you will have to pay attention to the configurations 
 later on in this workshop: you'll need to check that the namespace is correct as
@@ -92,7 +92,11 @@ didn't go along with 'developer-hub'._
 * In case you want to troubleshoot the installation, you can follow the instructions in
 [this training exercise](https://developers.redhat.com/learn/deploying-and-troubleshooting-red-hat-developer-hub-openshift-practical-guide).
 
-## Step 2b: Install Red Hat Developer Hub through the operator
+**!!! When you use the Helm based installation, be aware that the pods don't automatically 
+restart when applying changes. Make sure to kill the Developer Hub when applying new configurations
+(e.g., dynamic plugins, app config, ...). I'll be checking this issue, but for now, keep this in mind.**
+
+### Step 2b: Install Red Hat Developer Hub through the operator
 _We will be using 'demo-project' as a project/namespace name. Feel free to change it
 to what you like, but know that you will have to pay attention to the configurations
 later on in this workshop: you'll need to check that the namespace is correct if you
@@ -112,11 +116,13 @@ In order to do so, you can follow
 [this training exercise](https://developers.redhat.com/learn/deploying-and-troubleshooting-red-hat-developer-hub-openshift-practical-guide).  
 (Next to installation instructions, this training exercise contains a section with troubleshooting instructions as well).
 
-# Step 3: Integrate with GitHub
+## Step 3: Integrate with GitHub
 _Source manifest files for the tutorials can be found in this repository:
 [https://github.com/maarten-vandeperre/developer-hub-training-exercises](https://github.com/maarten-vandeperre/developer-hub-training-exercises),
 which can be cloned in your dev spaces environment. Be aware to change the default namespace 'demo-project'
-within these manifest files to your namespace._
+within these manifest files to your namespace.   
+!! In case you went for the Helm based installation,
+make sure to use the '-helm' manifest files._
 
 Before diving into tasks like setting up software templates, we first need to establish integration with a Git repository. 
 For this workshop, we’ve chosen GitHub. Note that GitHub apps have already been preconfigured for you, 
@@ -143,26 +149,4 @@ _(you can skip other configuration steps, as tasks like software template creati
 * '**2. Create a basic GitHub integration within Developer Hub** (i.e., repository creation and scanning)'
 * '**3.3 Enable GitHub authentication**'
 
-
-
-
-# TODO
-* for helm charts:
-  * dynamic plugin configuration name: redhat-developer-hub-dynamic-plugins
-  * app config name: redhat-developer-hub-app-config
-  * in app config, change data:app-config-rhdh to data:app-config
-* pods not automatically restarted
-*  add to app config:
-```yaml
-database:
-    connection:
-      password: ${POSTGRESQL_ADMIN_PASSWORD}
-      user: postgres
-```
-
-on instance 
-```yaml
-envFrom:
-            - secretRef:
-                name: rhdh-secrets-github-credentials
-```
+## Step 4: Applying software templates / golden path templates
