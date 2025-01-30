@@ -1,0 +1,233 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: openliberty-getting-started
+  title: Open Liberty Starter App
+  description: Creates an Open Liberty service hosting MicroProfile
+  tags:
+    - java
+    - liberty
+spec:
+  owner: liberty-authors
+  type: service
+
+  parameters:
+    - title: Provide information about the Git location
+      required:
+        - git_host
+        - repo_owner
+      properties:
+        git_host:
+          title: Git Host
+          type: string
+          description: Git Host
+          default: github.com
+        repo_owner:
+          title: Repo Owner
+          type: string
+          description: Git user that will own the repo
+        description:
+          title: Description
+          type: string
+          description: Help others understand what this component is for
+          default: Creates an Open Liberty getting started app
+    - title: Provide information about the new component
+      required:
+        - cluster_id
+        - namespace
+        - application_id
+        - owner
+      properties:
+        cluster_id:
+          title: Cluster Id
+          type: string
+          description: Id of the cluster (Everything in the host after .apps)
+          default: .apps.ocp.ibm.edu
+        namespace: 
+          title: Namespace
+          type: string
+          description: Namespace to be deployed in
+        application_id: 
+          title: Application Id
+          type: string
+          description: Id of the application
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component in RHDH
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind: [User]
+    - title: Provide information about the CI method
+      required:
+        - ci
+      properties:
+        ci:
+          title: Select a CI method
+          type: string
+          description: This action will create a CI pipeline for your application based on chosen method.
+          default: ../../../skeletons/github-actions/
+          enum:
+            - ./github-actions/
+            - ../../../skeletons/tekton/
+          enumNames:
+            - GitHub Actions
+            - Tekton (Not yet implemeneted)
+      dependencies:
+        ci:
+          oneOf:
+            - properties:
+                # Show no extra properties when GitHub Actions is selected
+                ci:
+                  const: ./github-actions/
+            - required:
+                - imageRepository
+                - namespace
+                - imageUrl
+              properties:
+                ci:
+                  const: ../../../skeletons/tekton/
+                imageRepository:
+                  title: Select a registry
+                  type: string
+                  default: ghcr.io
+                  enum:
+                    - quay.io
+                    - image-registry.openshift-image-registry.svc:5000
+                    - ghcr.io
+                  enumNames:
+                    - Quay
+                    - Internal OpenShift Registry
+                    - GitHub Container Registry
+                imageUrl:
+                  title: Image URL
+                  type: string
+                  description: The Image URL <REGISTRY>/<IMAGE_URL>/<REPO_NAME>
+    - title: Provide information about the ArgoCD Location
+      required:
+        - argocd_name
+        - argocd_namespace
+      properties:
+        argocd_name:
+          title: ArgoCD Name
+          type: string
+          description: Name of ArgoCD instance
+          default: argocd
+        argocd_namespace:
+          title: ArgoCD Instance Namespace
+          type: string
+          description: Namespace of ArgoCD instance
+          default: default
+  steps:
+    - id: templateSource
+      name: Generating the source code component
+      action: fetch:template
+      input:
+        url: ./skeleton
+        copyWithoutTemplating:
+          - .github/workflows/*
+        targetPath: ./source
+        values:
+          git_host: ${{parameters.git_host}}
+          repoOwner: ${{parameters.repo_owner}}
+          repoName: ${{parameters.namespace}}-${{parameters.application_id}}
+          owner: ${{parameters.owner}}
+          cluster_id: ${{parameters.cluster_id}}
+          namespace: ${{parameters.namespace}}
+          component_id: ${{parameters.namespace}}-${{parameters.application_id}}
+          description: ${{parameters.description}}
+    - id: publishSource
+      name: Publishing to Source Code Repository
+      action: publish:github
+      input:
+        sourcePath: ./source
+        description: ${{parameters.description}}
+        repoUrl: ${{parameters.git_host}}?owner=${{parameters.repo_owner}}&repo=${{parameters.namespace}}-${{parameters.application_id}}
+        defaultBranch: main
+        protectDefaultBranch: false
+        repoVisibility: public
+    - id: ciTemplate
+      name: Generating the CI Component
+      action: fetch:template
+      input:
+        url: ${{ parameters.ci }}
+        copyWithoutTemplating:
+          - .github/workflows/*
+        values:
+          orgName: ${{ parameters.orgName }}
+          repoName: ${{ parameters.repoName }}
+          owner: ${{ parameters.owner }}
+          system: ${{ parameters.system }}
+          applicationType: api
+          description: ${{ parameters.description }}
+          namespace: ${{ parameters.namespace }}
+          imageUrl: ${{ parameters.imageUrl }}
+          imageBuilder: s2i-java
+          imageRepository: ${{ parameters.imageRepository }}
+          port: ${{ parameters.port }}
+          ci: ${{ parameters.ci }}
+          groupId: ${{ parameters.groupId }}
+          artifactId: ${{ parameters.artifactId }}
+          javaPackageName: ${{ parameters.javaPackageName}}
+          sourceControl: github.com
+
+    - id: templateGitops
+      name: Generating the deployment resources and artefacts
+      action: fetch:template
+      input:
+        url: ./manifests
+        copyWithoutTemplating: []
+        values:
+          git_host: github.com
+          component_id: ${{parameters.namespace}}-${{parameters.application_id}}
+          description: ${{parameters.description}}
+          destination: https://${{parameters.git_host}}/${{parameters.repo_owner}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
+          source_repository: https://${{parameters.git_host}}/${{parameters.repo_owner}}/${{parameters.namespace}}-${{parameters.application_id}}.git
+          repository_name: ${{parameters.namespace}}-${{parameters.application_id}}
+          git_owner: ${{parameters.repo_owner}}
+          cluster: ${{parameters.cluster_id}}
+          namespace: ${{parameters.namespace}}
+          image_host: ${{parameters.image_host}}
+          image_name: ${{parameters.namespace}}/${{parameters.application_id}}
+          image_tag: ${{parameters.image_tag}}
+          application_id: ${{parameters.application_id}}
+        targetPath: ./tenant-gitops
+    - id: publishGitops
+      name: Publishing to Deployment Resource Repository
+      action: publish:github
+      input:
+        repoUrl: ${{parameters.git_host}}?owner=${{parameters.repo_owner}}&repo=${{parameters.namespace}}-${{parameters.application_id}}-gitops
+        title: gitops resources for ${{parameters.namespace}}-${{parameters.application_id}}
+        description: gitops resources for ${{parameters.namespace}}-${{parameters.application_id}}
+        sourcePath: ./tenant-gitops
+        defaultBranch: main
+        protectDefaultBranch: false
+        repoVisibility: public
+    - id: registerSource1
+      name: Register Liberty Service Component
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{steps.publishSource.output.repoContentsUrl}}
+        catalogInfoPath: /catalog-info.yaml
+    - id: create-argocd-resources
+      name: Create ArgoCD Resources
+      action: argocd:create-resources
+      input:
+        appName: ${{parameters.namespace}}-${{parameters.application_id}}-bootstrap
+        argoInstance: ${{parameters.argocd_name}}
+        namespace: ${{parameters.argocd_namespace}}
+        repoUrl: https://${{parameters.git_host}}/${{parameters.repo_owner}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
+        path: 'argocd/'
+  output:
+    links:
+      - title: Source Code Repository
+        url: ${{steps.publishSource.output.remoteUrl}}
+      - title: Pipeline status
+        url: https://console-openshift-console${{parameters.cluster_id}}/dev-pipelines/ns/${{parameters.namespace}}/
+      - title: Open Liberty Service Component
+        icon: catalog
+        entityRef: ${{steps.registerSource1.output.entityRef}}
+      - title: Open Liberty Frontend Component
+        icon: catalog
+        entityRef: ${{steps.registerSource2.output.entityRef}}

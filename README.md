@@ -166,4 +166,6 @@ can be found in this
 (Section '3.1 Create a repository via a software template').
 
 
-
+## TODO
+* oc rollout restart deployment/redhat-developer-hub
+* 
