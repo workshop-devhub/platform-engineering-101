@@ -158,12 +158,18 @@ within these manifest files to your namespace.
 make sure to use the '-helm' manifest files._
 
 For this exercise, we will make use of the following software template:
-[Open Liberty software template](https://github.com/OpenLiberty/liberty-backstage-template/blob/main/liberty-template/template.yaml)
+* For Operator-based installation: [Open Liberty software template](https://github.com/OpenLiberty/liberty-backstage-template/blob/main/liberty-template/template.yaml)
+* For Helm-based installation: [Helm Open Liberty software template](https://github.com/OpenLiberty/liberty-backstage-template/blob/main/liberty-template/template-helm.yaml)
 
 Instructions on how to add software templates to Developer Hub and how to apply them,
 can be found in this
 [training exercise](https://developers.redhat.com/learning/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub/resource/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub:resource:prerequisites-and-step-step-guide).
 (Section '3.1 Create a repository via a software template').
+**!!! Don't forget to use the**
+**[Open Liberty software template](https://github.com/OpenLiberty/liberty-backstage-template/blob/main/liberty-template/template.yaml)**
+**or**
+**[Helm Open Liberty software template](https://github.com/OpenLiberty/liberty-backstage-template/blob/main/liberty-template/template-helm.yaml)**
+**instead of the one mentioned in the exercise.**
 
 
 ## TODO
