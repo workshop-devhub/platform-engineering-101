@@ -174,4 +174,9 @@ can be found in this
 
 ## TODO
 * oc rollout restart deployment/redhat-developer-hub
-* 
+* personal access token on GitHub integration
+* Add GitHub actions visualisation before template creation.
+* Try if the github actions are taken from the skeleton and adapt it to use the repo owner
+* https://github.com/organizations/workshop-devhub/settings/packages enable public
+  * via package settings > make public
+* create open liberty app via docker creation on openshift
