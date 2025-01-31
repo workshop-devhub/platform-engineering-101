@@ -193,6 +193,15 @@ can be found in this
 **[Helm Open Liberty software template](https://github.com/grace-maarten/platform-engineering-101/blob/main/artefacts/software-templates/liberty-template/template-helm.yaml)**
 **instead of the one mentioned in the exercise.**
 
+**TODO rewrite:**
+When the template is initiated, go to the GitHub organization's repositories, 
+and you'll see that an application repository and a GitOps repository is created.
+Go to the application repository and check out the GitHub actions. You can use 
+docker build step to fetch the resulting docker image in case you don't have 
+ArgoCD enabled. Take this image, go to its details in GitHub and make it public.
+
+Now go to the OpenShift console and create a new application with this docker image.
+
 ## Step 5: Custom (dynamic) plugins
 
 
@@ -204,3 +213,5 @@ can be found in this
 * add the other helm configurations
 * dynamic plugins: https://github.com/maarten-vandeperre/developer-hub-documentation/blob/main/README-CreateDynamicPlugins.md
 
+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
+1126197
