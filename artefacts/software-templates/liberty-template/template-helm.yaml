@@ -157,6 +157,7 @@ spec:
         protectDefaultBranch: false
         repoVisibility: public
         token: '${{ secrets.githubPersonalAccessToken }}'
+        namespace: ${{parameters.namespace}}
     - id: ciTemplate
       name: Generating the CI Component
       action: fetch:template
@@ -215,6 +216,7 @@ spec:
         protectDefaultBranch: false
         repoVisibility: public
         token: '${{ secrets.githubPersonalAccessToken }}'
+        namespace: ${{parameters.namespace}}
     - id: registerSource1
       name: Register Liberty Service Component
       action: catalog:register
