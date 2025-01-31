@@ -94,7 +94,12 @@ didn't go along with 'developer-hub'._
 
 **!!! When you use the Helm based installation, be aware that the pods don't automatically 
 restart when applying changes. Make sure to kill the Developer Hub when applying new configurations
-(e.g., dynamic plugins, app config, ...). I'll be checking this issue, but for now, keep this in mind.**
+(e.g., dynamic plugins, app config, ...). The reason for this is that the Helm chart does not monitor 
+secrets or configmaps for changes, only what is done through a Helm upgrade.
+If you want to avoid to delete pods to get updates pushed through, you can use the following command:**
+```shell
+oc rollout restart deployment/redhat-developer-hub
+```
 
 ### Step 2b: Install Red Hat Developer Hub through the operator
 _We will be using 'demo-project' as a project/namespace name. Feel free to change it
@@ -161,6 +166,22 @@ For this exercise, we will make use of the following software template:
 * For Operator-based installation: [Open Liberty software template](https://github.com/grace-maarten/platform-engineering-101/blob/main/artefacts/software-templates/liberty-template/template.yaml)
 * For Helm-based installation: [Helm Open Liberty software template](https://github.com/grace-maarten/platform-engineering-101/blob/main/artefacts/software-templates/liberty-template/template-helm.yaml)
 
+**!! In order to be able to initiate a software template, you'll need to make sure that 
+you have a personal access token from GitHub:**
+1. Go to [GitHub profile settings](https://github.com/settings/profile).
+2. Got to Developer settings > Personal access tokens > Tokens (classic).
+3. Click 'Generate new token' > Generate new token (classic).
+4. Add these scopes to the token:
+   * **Reading software components:**
+     * repo 
+   * **Reading organization data:**
+     * read:org
+     * read:user
+     * user:email
+   * **Publishing software templates:**
+     * repo 
+     * workflow (if templates include GitHub workflows)
+
 Instructions on how to add software templates to Developer Hub and how to apply them,
 can be found in this
 [training exercise](https://developers.redhat.com/learning/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub/resource/learn:streamline-development-github-integration-and-software-templates-red-hat-developer-hub:resource:prerequisites-and-step-step-guide).
@@ -173,10 +194,11 @@ can be found in this
 
 
 ## TODO
-* oc rollout restart deployment/redhat-developer-hub
+* 
 * personal access token on GitHub integration
 * Add GitHub actions visualisation before template creation.
 * Try if the github actions are taken from the skeleton and adapt it to use the repo owner
 * https://github.com/organizations/workshop-devhub/settings/packages enable public
   * via package settings > make public
 * create open liberty app via docker creation on openshift
+* add the other helm configurations

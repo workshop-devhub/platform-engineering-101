@@ -31,6 +31,15 @@ spec:
           type: string
           description: Help others understand what this component is for
           default: Creates an Open Liberty getting started app
+    - title: GitHub Authentication
+      description: Provide authentication for GitHub repository access
+      required:
+        - githubPersonalAccessToken
+      properties:
+        githubPersonalAccessToken:
+          type: string
+          # use the built in Secret field extension
+          ui:field: Secret
     - title: Provide information about the new component
       required:
         - cluster_id
@@ -104,21 +113,21 @@ spec:
                   title: Image URL
                   type: string
                   description: The Image URL <REGISTRY>/<IMAGE_URL>/<REPO_NAME>
-    - title: Provide information about the ArgoCD Location
-      required:
-        - argocd_name
-        - argocd_namespace
-      properties:
-        argocd_name:
-          title: ArgoCD Name
-          type: string
-          description: Name of ArgoCD instance
-          default: argocd
-        argocd_namespace:
-          title: ArgoCD Instance Namespace
-          type: string
-          description: Namespace of ArgoCD instance
-          default: default
+#    - title: Provide information about the ArgoCD Location
+#      required:
+#        - argocd_name
+#        - argocd_namespace
+#      properties:
+#        argocd_name:
+#          title: ArgoCD Name
+#          type: string
+#          description: Name of ArgoCD instance
+#          default: argocd
+#        argocd_namespace:
+#          title: ArgoCD Instance Namespace
+#          type: string
+#          description: Namespace of ArgoCD instance
+#          default: default
   steps:
     - id: templateSource
       name: Generating the source code component
@@ -147,6 +156,7 @@ spec:
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public
+        token: '${{ secrets.githubPersonalAccessToken }}'
     - id: ciTemplate
       name: Generating the CI Component
       action: fetch:template
@@ -204,6 +214,7 @@ spec:
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public
+        token: '${{ secrets.githubPersonalAccessToken }}'
     - id: registerSource1
       name: Register Liberty Service Component
       action: catalog:register
