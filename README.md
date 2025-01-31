@@ -50,7 +50,7 @@ In order to get the OpenShift cluster, you will need to execute the following st
    * OpenShift dev spaces (an IDE running on OpenShift/Kubernetes), which is accessible through the browser.
    * The OpenShift AI sandbox.
 7. Click "Launch" for Red Hat OpenShift.
-8. Click Log in with "dev sandbox".
+8. Click Log in with "dev sandbox". (Use this GitHub repo as workspace Git repo URL: https://github.com/grace-maarten/platform-engineering-101.git).
 
 ### Step 1b: Obtain OpenShift through a demo environment
 TODO - fallback scenario
@@ -181,6 +181,7 @@ you have a personal access token from GitHub:**
    * **Publishing software templates:**
      * repo 
      * workflow (if templates include GitHub workflows)
+5. Store it somewhere: you'll need it later on when initiating a software template (i.e., within the form of the software template initiation).
 
 Instructions on how to add software templates to Developer Hub and how to apply them,
 can be found in this
@@ -192,13 +193,14 @@ can be found in this
 **[Helm Open Liberty software template](https://github.com/grace-maarten/platform-engineering-101/blob/main/artefacts/software-templates/liberty-template/template-helm.yaml)**
 **instead of the one mentioned in the exercise.**
 
+## Step 5: Custom (dynamic) plugins
+
 
 ## TODO
-* 
-* personal access token on GitHub integration
 * Add GitHub actions visualisation before template creation.
-* Try if the github actions are taken from the skeleton and adapt it to use the repo owner
 * https://github.com/organizations/workshop-devhub/settings/packages enable public
   * via package settings > make public
 * create open liberty app via docker creation on openshift
 * add the other helm configurations
+* dynamic plugins: https://github.com/maarten-vandeperre/developer-hub-documentation/blob/main/README-CreateDynamicPlugins.md
+
