@@ -24,6 +24,6 @@ components:
       image: quay.io/devfile/universal-developer-image:ubi8-latest
       memoryLimit: 6G
       memoryRequest: 512Mi
-      cpuRequest: 4000m
+      cpuRequest: 3000m
       cpuLimit: 8000m
       mountSources: true
