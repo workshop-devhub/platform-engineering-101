@@ -1,55 +1,29 @@
 schemaVersion: 2.2.0
 metadata:
-  name: nodejs
-  version: 3.0.0
-  displayName: Node.js Runtime
-  description: Stack with Node.js 18
-  tags: ["Node.js", "Express", "ubi8"]
-  projectType: "Node.js"
-  language: "JavaScript"
-  attributes:
-    alpha.dockerimage-port: 3001
-  provider: Red Hat
-  supportUrl: https://github.com/devfile-samples/devfile-support#support-information
-parent:
-  id: nodejs
-  version: 2.2.0
-  registryUrl: "https://registry.devfile.io"
+  name: udi
+  displayName: Universal Developer Image
+  description: Universal Developer Image provides various programming languages tools and runtimes for instant coding
+  icon: https://raw.githubusercontent.com/devfile/devfile-web/main/apps/landing-page/public/pwa-192x192.png
+  tags:
+    - Java
+    - Maven
+    - Scala
+    - PHP
+    - .NET
+    - Node.js
+    - Go
+    - Python
+    - Pip
+    - ubi8
+  projectType: universal
+  language: Polyglot
+  version: 1.0.0
 components:
-  - name: image-build
-    image:
-      imageName: nodejs-image:latest
-      dockerfile:
-        uri: Dockerfile
-        buildContext: .
-        rootRequired: false
-  - name: kubernetes-deploy
-    attributes:
-      deployment/replicas: 1
-      deployment/cpuRequest: 4000m
-      deployment/cpuLimit: 8000m # TODO try to increase memory
-      deployment/memoryRequest: 2048Mi
-      deployment/memoryLimit: 6G
-      deployment/container-port: 3001
-    kubernetes:
-      uri: deploy.yaml
-      endpoints:
-        - name: http-3001
-          targetPort: 3001
-          path: /
-          secure: true
-commands:
-  - id: build-image
-    apply:
-      component: image-build
-  - id: deployk8s
-    apply:
-      component: kubernetes-deploy
-  - id: deploy
-    composite:
-      commands:
-        - build-image
-        - deployk8s
-      group:
-        kind: deploy
-        isDefault: true
+  - name: tools
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      memoryLimit: 6G
+      memoryRequest: 512Mi
+      cpuRequest: 4000m
+      cpuLimit: 8000m
+      mountSources: true
