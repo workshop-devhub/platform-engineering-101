@@ -55,6 +55,28 @@ In order to get the OpenShift cluster, you will need to execute the following st
 ### Step 1b: Obtain OpenShift through a demo environment
 TODO - fallback scenario
 
+Installed operators:
+* Red Hat Developer Hub
+* Red Hat OpenShift GitOps
+* Red Hat OpenShift Dev Spaces
+
+***Whenever you want to use the dev spaces with the default devfile (i.e., not the universal one), make sure to enable 
+the oc command:**  
+install openshift cli:  
+```shell
+curl -o oc.tar https://downloads-openshift-console.apps.rm1.0a51.p1.openshiftapps.com/amd64/linux/oc.tar
+```
+```shell
+tar -xvf oc.tar
+```
+
+***Next to that, clone the exercise manifest files into this repository too (i.e., will be used later on in this workshop):***  
+```shell
+mkdir training-exercises
+cd training-exercises
+git clone https://github.com/maarten-vandeperre/developer-hub-training-exercises.git
+```
+
 ## Step 2: Install Red Hat Developer Hub on OpenShift
 _When interacting with an OpenShift cluster, you can make use of the OpenShift CLI._
 _Command line tools can be found by logging in to an OpenShift cluster, clicking the 
@@ -153,6 +175,7 @@ focus on the following steps:
 _(you can skip other configuration steps, as tasks like software template creation will be covered later in the workshop)_
 * '**2. Create a basic GitHub integration within Developer Hub** (i.e., repository creation and scanning)'
 * '**3.3 Enable GitHub authentication**'
+* [optional] '**3.4 Enable GitHub actions**' _(i.e., can be used to visualize the GitHub actions from Step 4)._
 
 ## Step 4: Applying software templates / golden path templates
 _Source manifest files for the tutorials can be found in this repository:
@@ -203,15 +226,26 @@ ArgoCD enabled. Take this image, go to its details in GitHub and make it public.
 Now go to the OpenShift console and create a new application with this docker image.
 
 ## Step 5: Custom (dynamic) plugins
+### Environment setup
+First of all, execute the following commands to prepare the environment (e.g., yarn, npm configs, ...).  
+```shell
+mkdir -p ~/.npm-global/lib
+npm config set prefix ~/.npm-global
+```
+
+```shell
+export PATH=~/.npm-global/bin:$PATH
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+```shell
+npm install -g yarn
+```
 
 
 ## TODO
-* Add GitHub actions visualisation before template creation.
 * https://github.com/organizations/workshop-devhub/settings/packages enable public
   * via package settings > make public
 * create open liberty app via docker creation on openshift
 * add the other helm configurations
-* dynamic plugins: https://github.com/maarten-vandeperre/developer-hub-documentation/blob/main/README-CreateDynamicPlugins.md
-
-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
-1126197
