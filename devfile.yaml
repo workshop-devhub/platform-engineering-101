@@ -25,6 +25,6 @@ components:
       image: quay.io/devfile/base-developer-image:ubi9-latest
       memoryLimit: 6G
       memoryRequest: 512Mi
-      cpuRequest: 3000m
-      cpuLimit: 8000m
+      cpuRequest: 1000m
+      cpuLimit: 3000m
       mountSources: true
