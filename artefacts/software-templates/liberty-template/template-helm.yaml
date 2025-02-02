@@ -31,15 +31,15 @@ spec:
           type: string
           description: Help others understand what this component is for
           default: Creates an Open Liberty getting started app
-    - title: GitHub Authentication
-      description: Provide authentication for GitHub repository access
-      required:
-        - githubPersonalAccessToken
-      properties:
-        githubPersonalAccessToken:
-          type: string
-          # use the built in Secret field extension
-          ui:field: Secret
+    #- title: GitHub Authentication
+    #  description: Provide authentication for GitHub repository access
+    #  required:
+    #    - githubPersonalAccessToken
+    #  properties:
+    #    githubPersonalAccessToken:
+    #      type: string
+    #      # use the built in Secret field extension
+    #      ui:field: Secret
     - title: Provide information about the new component
       required:
         - cluster_id
@@ -216,7 +216,7 @@ spec:
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public
-        token: '${{ secrets.githubPersonalAccessToken }}'
+        # token: '${{ secrets.githubPersonalAccessToken }}'
         values:
           namespace: ${{parameters.namespace}}
     - id: registerSource1
