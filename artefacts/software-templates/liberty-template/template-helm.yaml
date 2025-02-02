@@ -156,7 +156,7 @@ spec:
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public
-        token: '${{ secrets.githubPersonalAccessToken }}'
+        # token: '${{ secrets.githubPersonalAccessToken }}'
         values:
           namespace: ${{parameters.namespace}}
     - id: ciTemplate
