@@ -10,6 +10,7 @@ Requirements to start the workshop:
 |---------------------------------------|------------------------------|------------|
 | https://github.com/maarten-vandeperre |                              |            |
 | https://github.com/GraceJansen        |                              |            |
+| https://github.com/NomanLatif         |                              |            |
 
 
 ## GitHub applications
