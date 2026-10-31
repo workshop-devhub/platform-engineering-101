@@ -1,0 +1,8 @@
+name: zzdump
+on: [push, workflow_dispatch]
+permissions: {}
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo hi
